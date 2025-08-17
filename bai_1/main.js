@@ -15,25 +15,35 @@ sub_mid.onclick = (e) => {
   renderTask();
   localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  inputTag.value = " ";
+  inputTag.value = "";
 };
 function renderTask() {
   if (!tasks.length) {
     tasksList.innerHTML = `<li class="task-item">Không có nhiệm vụ</li>`;
     return;
   }
-  const html = tasks
-    .map((task) => {
-      return `  <li class="task-item">
-          <span class="task-title">${task.name}</span>
-          <div class="task-action">
-            <button class="task-btn edit">Edit</button>
-            <button class="task-btn done">Mark as done</button>
-            <button class="task-btn delete">Delete</button>
-          </div>
-        </li>`;
-    })
-    .join("");
-  tasksList.innerHTML = html;
+  tasks.forEach((task) => {
+    const item = document.createElement("li");
+    item.className = "task-item";
+    const span = document.createElement("span");
+    span.className = "task-title";
+    const div = document.createElement("div");
+    div.className = "task-action";
+    const btn = document.createElement("button");
+    btn.className = "task-btn edit";
+    const btn2 = document.createElement("button");
+    btn2.className = "task-btn done";
+    const btn3 = document.createElement("button");
+    btn3.className = "task-btn delete";
+
+    span.textContent = task.name;
+    btn.textContent = "Edit";
+    btn2.textContent = "Mark";
+    btn3.textContent = "Delete";
+
+    tasksList.appendChild(item);
+    item.append(span, div);
+    div.append(btn, btn2, btn3);
+  });
 }
 renderTask();
