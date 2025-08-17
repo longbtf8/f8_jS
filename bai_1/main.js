@@ -22,6 +22,7 @@ function renderTask() {
     tasksList.innerHTML = `<li class="task-item">Không có nhiệm vụ</li>`;
     return;
   }
+  tasks.innerHTML = "";
   tasks.forEach((task) => {
     const item = document.createElement("li");
     item.className = "task-item";
